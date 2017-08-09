@@ -1,12 +1,9 @@
 /**
-
    ~~~ BISMILLAH HIR RAHMANIR RAHIM ~~~
-
    Problem Name: Go-Back-N Sliding Window Protocol with CRC32 error detection
        Platform: Data Communication
       Algorithm: Go-Back-N , CRC32
   Author's Name: RC Tushar
-
 ----------------------------------------------------
 let the light of the Shelley moon die tonight
 let the sky cover herself with dark shroud, tonight
@@ -14,9 +11,7 @@ but not the hope that promised to live
 Just say her, dear, don't sleep tonight
 die another day, die another night
 ----------------------------------------------------
-
 "Don't follow others,instead learn from their experience and make your own path"
-
 **/
 
 
@@ -191,7 +186,6 @@ int chunk(int x,int y,string P)  // Shows all states of the Go-Back N protocol
     {
         system("cls");
         pf("\n\nData Of Frame %d: %s\n",i,frame[i].c_str());
-
         pf("\n\nData Of Divisor: %s ",P.c_str());
 
         if(ck_err(frame[i],P))
