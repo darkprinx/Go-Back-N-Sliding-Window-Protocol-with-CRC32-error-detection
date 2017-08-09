@@ -33,12 +33,11 @@ using namespace std;
 
 
 string frame[50];
-string P="100000100110000010001110110110111";  // P value of CRC32
 int n,w;
 
 char Reminder[500]= {},Recieved[500]= {};
 
-void crc(string input)  // CRC error detection function
+void crc(string input,string P)  // CRC error detection function
 {
     int i,j,keylen,msglen;
 
@@ -92,10 +91,10 @@ void crc(string input)  // CRC error detection function
 }
 
 
-bool ck_err(string input)  // This function takes a frame and returns the state (success/damage) of the received frame
+bool ck_err(string input,string P)  // This function takes a frame and returns the state (success/damage) of the received frame
 {
     int rr,gg;
-    crc(input);     // CRC32 to find the FCS and Resultant Message
+    crc(input,P);     // CRC32 to find the FCS and Resultant Message
 
     rr=rand()%4;    // randomly picks a frame to manipulate it.
                     // If rr=0 it will manipulate the current frame
@@ -111,7 +110,7 @@ bool ck_err(string input)  // This function takes a frame and returns the state 
             Recieved[gg]='0';
     }
 
-    crc(Recieved); // CRC32 to check the received message's reminder
+    crc(Recieved,P); // CRC32 to check the received message's reminder
 
     pf("\n\n Reminder Found:  %s\n",Reminder);
     for(int i=0; Reminder[i]; i++)
@@ -180,7 +179,7 @@ void Print_discard(int x,int y) // marks & prints discarded frames
     cout<<endl<<endl;
 }
 
-int chunk(int x,int y)  // Shows all states of the Go-Back N protocol
+int chunk(int x,int y,string P)  // Shows all states of the Go-Back N protocol
 {
     system("cls");
     pf("\n\n## Frame %d to %d is Sending\n\n",x,y);
@@ -195,7 +194,7 @@ int chunk(int x,int y)  // Shows all states of the Go-Back N protocol
 
         pf("\n\nData Of Divisor: %s ",P.c_str());
 
-        if(ck_err(frame[i]))
+        if(ck_err(frame[i],P))
         {
             pf("\n\n ## Frame %d received successfully\n\n\n",i);
             show();
@@ -224,6 +223,7 @@ int chunk(int x,int y)  // Shows all states of the Go-Back N protocol
 
 int main()
 {
+    string P="100000100110000010001110110110111";  // P value of CRC32
     srand(time(NULL));
 
     pf("Give Total Frame Size: ");
@@ -237,7 +237,7 @@ int main()
 
     int i=0;
     while(i<n)
-        i=chunk(i,min(i+w-1,n-1));
+        i=chunk(i,min(i+w-1,n-1),P);
 
     return 0;
 }
