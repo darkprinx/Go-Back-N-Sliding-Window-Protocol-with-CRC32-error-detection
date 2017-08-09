@@ -36,7 +36,7 @@ int n,w;
 
 char Reminder[500]= {};
 
-char* crc(char *input,char key[])
+char* crc(char *input,char key[]) // CRC error detection function
 {
     int i,j,keylen,msglen;
     char temp[500],quot[100],rem[500],key1[500];
@@ -231,7 +231,7 @@ int main()
     pf("Give Window Size: ");
     cin>>w;
 
-    //10 random 50 bit-frame generated
+    //n random 50 bit-frame generated
     for(int i=0; i<n; i++)
         strcpy(frame[i],genar());
 
