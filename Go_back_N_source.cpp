@@ -232,7 +232,7 @@ int main()
     cin>>w;
 
     //10 random 50 bit-frame generated
-    for(int i=0; i<10; i++)
+    for(int i=0; i<n; i++)
         frame[i]=genar();
 
     int i=0;
